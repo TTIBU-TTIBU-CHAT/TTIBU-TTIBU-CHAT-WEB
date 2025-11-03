@@ -3,8 +3,8 @@ version: '3.8'
 services:
   # Nginx 리버스 프록시 (HTTPS 처리)
   nginx:
-    image: ${DOCKER_USERNAME}/ttibu-nginx:latest
-    container_name: ttibu-nginx
+    image: ${DOCKER_USERNAME}/ttibu-web-nginx:latest
+    container_name: ttibu-web-nginx
     ports:
       - "80:80"
       - "443:443"
@@ -21,8 +21,8 @@ services:
 
   # Backend (Spring Boot)
   backend:
-    image: ${DOCKER_USERNAME}/ttibu-backend:latest
-    container_name: ttibu-backend
+    image: ${DOCKER_USERNAME}/ttibu-web-backend:latest
+    container_name: ttibu-web-backend
     expose:
       - "8080"
     environment:
@@ -41,8 +41,8 @@ services:
 
   # Frontend (React)
   frontend:
-    image: ${DOCKER_USERNAME}/ttibu-frontend:latest
-    container_name: ttibu-frontend
+    image: ${DOCKER_USERNAME}/ttibu-web-frontend:latest
+    container_name: ttibu-web-frontend
     expose:
       - "80"
     depends_on:

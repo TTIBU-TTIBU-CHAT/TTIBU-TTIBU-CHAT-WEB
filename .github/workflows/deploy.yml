@@ -39,9 +39,9 @@ jobs:
           file: ./nginx/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/ttibu-nginx:latest
-            ${{ secrets.DOCKER_USERNAME }}/ttibu-nginx:${{ github.sha }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-nginx:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-web-nginx:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-web-nginx:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-web-nginx:latest
           cache-to: type=inline
 
       # Backend 이미지 빌드 & 푸시
@@ -52,9 +52,9 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/ttibu-backend:latest
-            ${{ secrets.DOCKER_USERNAME }}/ttibu-backend:${{ github.sha }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-web-backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-web-backend:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-web-backend:latest
           cache-to: type=inline
 
       # Frontend 이미지 빌드 & 푸시
@@ -65,9 +65,9 @@ jobs:
           file: ./frontend/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/ttibu-frontend:latest
-            ${{ secrets.DOCKER_USERNAME }}/ttibu-frontend:${{ github.sha }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-frontend:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-web-frontend:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-web-frontend:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-web-frontend:latest
           cache-to: type=inline
 
   deploy:
@@ -108,9 +108,9 @@ jobs:
             echo "${{ env.DOCKER_PASSWORD }}" | docker login -u "${{ env.DOCKER_USERNAME }}" --password-stdin
 
             # 최신 이미지 Pull
-            docker pull ${{ env.DOCKER_USERNAME }}/ttibu-nginx:latest
-            docker pull ${{ env.DOCKER_USERNAME }}/ttibu-backend:latest
-            docker pull ${{ env.DOCKER_USERNAME }}/ttibu-frontend:latest
+            docker pull ${{ env.DOCKER_USERNAME }}/ttibu-web-nginx:latest
+            docker pull ${{ env.DOCKER_USERNAME }}/ttibu-web-backend:latest
+            docker pull ${{ env.DOCKER_USERNAME }}/ttibu-web-frontend:latest
 
             # docker-compose.prod.yml 사용하여 배포
             docker compose -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml down
