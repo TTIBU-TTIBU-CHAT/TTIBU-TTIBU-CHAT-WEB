@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Nginx 리버스 프록시 (로컬 개발용 - HTTP만)
   nginx:

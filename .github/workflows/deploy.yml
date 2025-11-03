@@ -113,11 +113,11 @@ jobs:
             docker pull ${{ env.DOCKER_USERNAME }}/ttibu-web-frontend:latest
 
             # docker-compose.prod.yml 사용하여 배포
-            docker compose -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml down
-            docker compose -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml up -d
+            docker compose --env-file .env -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml down
+            docker compose --env-file .env -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml up -d
 
             # 사용하지 않는 이미지 정리
             docker image prune -af
 
             # 배포 상태 확인
-            docker compose -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml ps
+            docker compose --env-file .env -f TTIBU-TTIBU-CHAT-WEB/docker-compose.prod.yml ps
