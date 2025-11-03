@@ -6,7 +6,7 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    container_name: ttibu-nginx
+    container_name: ttibu-web-nginx
     ports:
       - "80:80"
     depends_on:
@@ -21,7 +21,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: ttibu-backend
+    container_name: ttibu-web-backend
     ports:
       - "8080:8080"
     environment:
@@ -38,7 +38,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: ttibu-frontend
+    container_name: ttibu-web-frontend
     ports:
       - "3000:80"
     depends_on:
@@ -50,7 +50,7 @@ services:
   # PostgreSQL Database (로컬 개발용 - 간단한 기본값)
   db:
     image: postgres:16-alpine
-    container_name: ttibu-db
+    container_name: ttibu-web-db
     ports:
       - "5432:5432"
     environment:
