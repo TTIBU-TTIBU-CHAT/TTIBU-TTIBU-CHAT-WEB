@@ -39,9 +39,9 @@ jobs:
           file: ./nginx/Dockerfile
           push: true
           tags: |
-            ${{ env.DOCKER_USERNAME }}/ttibu-nginx:latest
-            ${{ env.DOCKER_USERNAME }}/ttibu-nginx:${{ github.sha }}
-          cache-from: type=registry,ref=${{ env.DOCKER_USERNAME }}/ttibu-nginx:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-nginx:latest
+            ${{ secrets.DOCKER_USERNAME }}/ttibu-nginx:${{ github.sha }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/ttibu-nginx:latest
           cache-to: type=inline
 
       # Backend 이미지 빌드 & 푸시
