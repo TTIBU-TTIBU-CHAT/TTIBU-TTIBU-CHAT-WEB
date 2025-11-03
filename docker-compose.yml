@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # Nginx 리버스 프록시 (HTTPS 처리)
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: ttibu-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # EC2에 있는 certbot 인증서 마운트
+      - ~/tibutibu/certs:/etc/letsencrypt:ro
+      - ~/tibutibu/certbot/www:/var/www/certbot:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - ttibu-network
+    restart: unless-stopped
+
+  # Backend (Spring Boot)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ttibu-backend
+    expose:
+      - "8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - ttibu-network
+    restart: unless-stopped
+
+  # Frontend (React)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ttibu-frontend
+    expose:
+      - "80"
+    depends_on:
+      - backend
+    networks:
+      - ttibu-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: ttibu-db
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_DB=ttibu
+      - POSTGRES_USER=tibutibu
+      - POSTGRES_PASSWORD=tibutibu
+      - TZ=Asia/Seoul
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - ttibu-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tibutibu -d ttibu"]
+      timeout: 20s
+      retries: 10
+      interval: 5s
+    restart: unless-stopped
+
+networks:
+  ttibu-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
