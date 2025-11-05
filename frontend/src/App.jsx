@@ -1,6 +1,40 @@
+import { useState } from 'react'
 import './App.css'
 
 function App() {
+  const [inputText, setInputText] = useState('')
+  const [result, setResult] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+    setResult('')
+
+    try {
+      const response = await fetch('/api/test/hodu', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: inputText }),
+      })
+
+      if (!response.ok) {
+        throw new Error('API 요청 실패')
+      }
+
+      const data = await response.json()
+      setResult(data.result)
+    } catch (err) {
+      setError('백엔드 연결 실패: ' + err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="container">
       <header>
@@ -14,6 +48,24 @@ function App() {
           GPT 대화 내용을 그룹화하고, 그룹화한 것들을 선택 후 조합해
           그룹화한 것들을 기반으로 대화를 진행할 수 있는 서비스입니다.
         </p>
+      </section>
+
+      <section className="api-test">
+        <h2>Backend 연동 테스트</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder="텍스트를 입력하세요"
+            disabled={loading}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? '처리 중...' : 'Hodu 붙이기'}
+          </button>
+        </form>
+        {result && <div className="result success">결과: {result}</div>}
+        {error && <div className="result error">{error}</div>}
       </section>
 
       <section className="features">
