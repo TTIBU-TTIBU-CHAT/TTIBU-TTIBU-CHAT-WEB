@@ -1,0 +1,123 @@
+/* Base CSS Reset and Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Default CSS Variables (White Theme) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --text-secondary: #6b7280;
+  --accent-color: #2563eb;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --section-bg: #f9fafb;
+  --footer-bg: #f3f4f6;
+  --footer-text: #374151;
+}
+
+/* White Theme */
+.theme-white {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --text-secondary: #6b7280;
+  --accent-color: #2563eb;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --section-bg: #f9fafb;
+  --footer-bg: #f3f4f6;
+  --footer-text: #374151;
+}
+
+/* Blue Theme */
+.theme-blue {
+  --bg-color: #0b1220;
+  --text-color: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent-color: #60a5fa;
+  --border-color: #334155;
+  --card-bg: #1e293b;
+  --section-bg: #0f172a;
+  --footer-bg: #020617;
+  --footer-text: #cbd5e1;
+}
+
+/* Apply theme colors */
+.theme-white,
+.theme-blue {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Scrollbar Styling */
+.theme-white::-webkit-scrollbar {
+  width: 8px;
+}
+
+.theme-white::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.theme-white::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.theme-white::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+.theme-blue::-webkit-scrollbar {
+  width: 8px;
+}
+
+.theme-blue::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.theme-blue::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.theme-blue::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
