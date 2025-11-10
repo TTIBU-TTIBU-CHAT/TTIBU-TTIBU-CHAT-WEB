@@ -13,7 +13,7 @@ function Hero() {
       <div className="hero-content">
         <h1 className="hero-title">띠부띠부챗</h1>
         <p className="hero-description">
-          GPT 대화 내용을 그룹화하고 조합해서 효율적으로 관리하는 AI 챗봇 서비스
+          ChatGPT, Claude, Gemini 같은 대화형 생성 AI들의 대화 기록을 그룹화하고 관리       
         </p>
         <div className="hero-buttons">
           <button
@@ -23,7 +23,7 @@ function Hero() {
             Get Started
           </button>
           <a
-            href="https://github.com/yourusername/ttibu-chat"
+            href="https://github.com/TTIBU-TTIBU-CHAT/TTIBU-TTIBU-CHAT.git"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary"
