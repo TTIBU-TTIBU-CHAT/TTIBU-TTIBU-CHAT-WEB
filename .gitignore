@@ -9,6 +9,7 @@ Thumbs.db
 *.swo
 *~
 
+.claude/
 # Backend (Spring Boot)
 backend/target/
 backend/.gradle/
