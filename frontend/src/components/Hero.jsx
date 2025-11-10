@@ -13,7 +13,7 @@ function Hero() {
       <div className="hero-content">
         <h1 className="hero-title">띠부띠부챗</h1>
         <p className="hero-description">
-          ChatGPT, Claude, Gemini 같은 대화형 생성 AI들의 대화 기록을 그룹화하고 관리       
+          흩어진 말들로, 하나의 흐름을 만든다.     
         </p>
         <div className="hero-buttons">
           <button
