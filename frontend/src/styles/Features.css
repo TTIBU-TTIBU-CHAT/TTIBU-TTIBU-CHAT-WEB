@@ -1,6 +1,21 @@
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('../assets/Paperlogy-1.000/Paperlogy-4Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('../assets/Paperlogy-1.000/Paperlogy-7Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .features {
   padding: 5rem 2rem;
   background-color: #f9f9f9;
+  font-family: 'Paperlogy', sans-serif;
 }
 
 .features-container {
