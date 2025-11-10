@@ -44,4 +44,10 @@ public class PostService {
                 .map(PostResponse::from)
                 .collect(Collectors.toList());
     }
+
+    public PostResponse getPostById(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다"));
+        return PostResponse.from(post);
+    }
 }

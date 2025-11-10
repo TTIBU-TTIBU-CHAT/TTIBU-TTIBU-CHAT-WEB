@@ -37,4 +37,14 @@ public class PostController {
         List<PostResponse> posts = postService.getAllPosts();
         return ResponseEntity.ok(posts);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponse> getPostById(@PathVariable Long id) {
+        try {
+            PostResponse post = postService.getPostById(id);
+            return ResponseEntity.ok(post);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
