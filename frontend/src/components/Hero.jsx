@@ -11,9 +11,9 @@ function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero-content">
-        <h1 className="hero-title">띠부띠부챗</h1>
+        <h1 className="hero-title">    흩어진 말들로, 하나의 흐름을 만든다.     </h1>
         <p className="hero-description">
-          흩어진 말들로, 하나의 흐름을 만든다.     
+          띠부띠부챗   
         </p>
         <div className="hero-buttons">
           <button
