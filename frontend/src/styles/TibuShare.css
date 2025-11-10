@@ -1,0 +1,171 @@
+.tibu-share {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.tibu-share-nav {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tibu-share-nav h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.tibu-share-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.tibu-share-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tibu-share-header h2 {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.tibu-share-header p {
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+.search-box {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.share-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.share-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+}
+
+.share-header {
+  margin-bottom: 1rem;
+}
+
+.share-header h3 {
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.share-author {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.share-description {
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.share-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1rem;
+}
+
+.share-date {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.like-button {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.like-button:hover {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+  .tibu-share-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .tibu-share-header h2 {
+    font-size: 2rem;
+  }
+
+  .share-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tibu-share-nav {
+    padding: 1rem 1.5rem;
+  }
+}
