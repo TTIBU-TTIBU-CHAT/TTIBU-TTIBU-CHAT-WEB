@@ -1,4 +1,4 @@
-export function PostList({ posts, searchTerm, onSearch, onLike }) {
+export function PostList({ posts, searchTerm, onSearch, onLike, onViewDetail }) {
   return (
     <section id="public-list" className="public-list-section">
       <div className="public-list-container">
@@ -28,7 +28,10 @@ export function PostList({ posts, searchTerm, onSearch, onLike }) {
               <div className="share-footer">
                 <span className="share-date">{share.date}</span>
                 <div className="share-actions">
-                  <button className="action-button view-button">
+                  <button
+                    className="action-button view-button"
+                    onClick={() => onViewDetail(share.id)}
+                  >
                     자세히 보기
                   </button>
                   <button

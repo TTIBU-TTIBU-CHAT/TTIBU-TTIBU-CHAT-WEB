@@ -5,6 +5,7 @@ import { ShareNav } from '../components/TibuShare/ShareNav';
 import { ShareHero } from '../components/TibuShare/ShareHero';
 import { UploadSection } from '../components/TibuShare/UploadSection';
 import { PostList } from '../components/TibuShare/PostList';
+import { PostDetailModal } from '../components/TibuShare/PostDetailModal';
 import '../styles/TibuShare.css';
 
 function TibuShare() {
@@ -23,6 +24,7 @@ function TibuShare() {
   const [searchTerm, setSearchTerm] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [selectedPost, setSelectedPost] = useState(null);
 
   // 게시글 목록 불러오기
   useEffect(() => {
@@ -197,6 +199,22 @@ function TibuShare() {
     );
   };
 
+  const handleViewDetail = async (postId) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}`);
+      if (response.ok) {
+        const post = await response.json();
+        setSelectedPost(post);
+      }
+    } catch (error) {
+      console.error('게시글 상세 정보 로딩 실패:', error);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedPost(null);
+  };
+
   const goBack = () => {
     window.history.back();
   };
@@ -233,7 +251,12 @@ function TibuShare() {
         searchTerm={searchTerm}
         onSearch={(e) => setSearchTerm(e.target.value)}
         onLike={handleLike}
+        onViewDetail={handleViewDetail}
       />
+
+      {selectedPost && (
+        <PostDetailModal post={selectedPost} onClose={handleCloseModal} />
+      )}
     </div>
   );
 }
