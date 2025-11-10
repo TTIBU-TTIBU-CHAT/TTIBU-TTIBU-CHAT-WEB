@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import '../styles/NavBar.css';
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isAuthenticated, user, logout } = useAuth();
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -13,7 +15,20 @@ function NavBar() {
   };
 
   const navigateToTibuShare = () => {
-    window.location.href = '/tibu-share';
+    window.history.pushState({}, '', '/tibu-share');
+    window.dispatchEvent(new Event('popstate'));
+    setIsMenuOpen(false);
+  };
+
+  const handleLogin = () => {
+    window.history.pushState({}, '', '/login');
+    window.dispatchEvent(new Event('popstate'));
+    setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setIsMenuOpen(false);
   };
 
   return (
@@ -26,6 +41,7 @@ function NavBar() {
         <button
           className="navbar-toggle"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="메뉴 토글"
         >
           ☰
         </button>
@@ -44,6 +60,20 @@ function NavBar() {
             >
               Get Started
             </button>
+          </li>
+          <li>
+            {isAuthenticated ? (
+              <div className="auth-info">
+                <span className="user-name">{user?.name}</span>
+                <button className="logout-button" onClick={handleLogout}>
+                  로그아웃
+                </button>
+              </div>
+            ) : (
+              <button className="login-button" onClick={handleLogin}>
+                로그인
+              </button>
+            )}
           </li>
         </ul>
       </div>

@@ -9,5 +9,10 @@ spring:
       minimum-idle: 10
       connection-timeout: 30000
 
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000  # 24 hours in milliseconds
+
 server:
   port: 8080

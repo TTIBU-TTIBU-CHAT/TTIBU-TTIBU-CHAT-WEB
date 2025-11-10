@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { AuthProvider } from './contexts/AuthContext'
 import './App.css'
 import NavBar from './components/NavBar'
 import Hero from './components/Hero'
@@ -9,14 +10,18 @@ import Demo from './components/Demo'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import TibuShare from './pages/TibuShare'
+import Login from './pages/Login'
 
-function App() {
+function AppContent() {
   const [currentPage, setCurrentPage] = useState('home')
 
   useEffect(() => {
     const handleNavigation = () => {
-      if (window.location.pathname === '/tibu-share') {
+      const path = window.location.pathname;
+      if (path === '/tibu-share' || path.startsWith('/tibu-share')) {
         setCurrentPage('tibu-share')
+      } else if (path === '/login' || path.startsWith('/login')) {
+        setCurrentPage('login')
       } else {
         setCurrentPage('home')
       }
@@ -36,6 +41,10 @@ function App() {
     }
   }, [])
 
+  if (currentPage === 'login') {
+    return <Login />
+  }
+
   if (currentPage === 'tibu-share') {
     return <TibuShare />
   }
@@ -53,6 +62,14 @@ function App() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   )
 }
 
