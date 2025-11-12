@@ -1,69 +1,188 @@
-.docs {
-  padding: 5rem 2rem;
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('../assets/Paperlogy-1.000/Paperlogy-4Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('../assets/Paperlogy-1.000/Paperlogy-7Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+.docs-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: 'Paperlogy', sans-serif;
+}
+
+.docs-sidebar {
+  width: 280px;
   background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+  padding: 2rem 1.5rem;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.docs-container {
-  max-width: 1200px;
-  margin: 0 auto;
+.docs-sidebar h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
 }
 
-.docs-description {
-  text-align: center;
-  font-size: 1.125rem;
-  color: #6b7280;
-  margin-bottom: 3rem;
+.docs-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.docs-nav-item {
+  background: none;
+  border: none;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  color: #4b5563;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s;
+  font-family: 'Paperlogy', sans-serif;
+}
+
+.docs-nav-item:hover {
+  background-color: #e5e7eb;
+  color: #1a1a1a;
+}
+
+.docs-nav-item.active {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .docs-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  margin-left: 280px;
+  flex: 1;
+  padding: 3rem 4rem;
+  max-width: 900px;
 }
 
-.docs-card {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.docs-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
-}
-
-.docs-card h3 {
-  font-size: 1.5rem;
+.doc-section h1 {
+  font-size: 2.5rem;
   font-weight: bold;
   color: #1a1a1a;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+.doc-section h2 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-top: 2.5rem;
   margin-bottom: 1rem;
 }
 
-.docs-card p {
-  color: #6b7280;
-  line-height: 1.6;
+.doc-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.doc-section p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #4b5563;
   margin-bottom: 1.5rem;
 }
 
-.docs-link {
-  color: #2563eb;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.3s;
+.doc-section ul,
+.doc-section ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.docs-link:hover {
-  color: #1d4ed8;
+.doc-section li {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
 }
 
-@media (max-width: 768px) {
-  .docs {
-    padding: 3rem 1.5rem;
+.doc-section pre {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.doc-section code {
+  background-color: #f1f5f9;
+  color: #dc2626;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+.doc-section pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.doc-section section {
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .docs-sidebar {
+    width: 240px;
   }
 
   .docs-content {
-    grid-template-columns: 1fr;
+    margin-left: 240px;
+    padding: 2rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .docs-page {
+    flex-direction: column;
+  }
+
+  .docs-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .docs-content {
+    margin-left: 0;
+    padding: 2rem 1.5rem;
+  }
+
+  .doc-section h1 {
+    font-size: 2rem;
+  }
+
+  .doc-section h2 {
+    font-size: 1.5rem;
   }
 }

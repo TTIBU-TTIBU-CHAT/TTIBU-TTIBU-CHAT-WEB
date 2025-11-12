@@ -83,6 +83,24 @@
   font-weight: 500;
 }
 
+.language-toggle {
+  background-color: #f3f4f6;
+  color: #1a1a1a;
+  padding: 0.5rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  font-size: 0.875rem;
+}
+
+.language-toggle:hover {
+  background-color: #e5e7eb;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
 .login-button,
 .logout-button {
   background-color: transparent;

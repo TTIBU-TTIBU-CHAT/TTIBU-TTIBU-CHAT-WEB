@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react'
 import { AuthProvider } from './contexts/AuthContext'
+import { LanguageProvider } from './contexts/LanguageContext'
 import './App.css'
 import NavBar from './components/NavBar'
 import Hero from './components/Hero'
 import Features from './components/Features'
-import Docs from './components/Docs'
+import DocsSection from './components/Docs'
 import Teams from './components/Teams'
 import Demo from './components/Demo'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import TibuShare from './pages/TibuShare'
 import Login from './pages/Login'
+import Docs from './pages/Docs'
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -22,6 +24,8 @@ function AppContent() {
         setCurrentPage('tibu-share')
       } else if (path === '/login' || path.startsWith('/login')) {
         setCurrentPage('login')
+      } else if (path === '/docs' || path.startsWith('/docs')) {
+        setCurrentPage('docs')
       } else {
         setCurrentPage('home')
       }
@@ -49,13 +53,16 @@ function AppContent() {
     return <TibuShare />
   }
 
+  if (currentPage === 'docs') {
+    return <Docs />
+  }
+
   return (
     <div className="App">
       <NavBar />
       <main>
         <Hero />
         <Features />
-        <Docs />
         <Teams />
         <Demo />
         <Contact />
@@ -67,9 +74,11 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <LanguageProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </LanguageProvider>
   )
 }
 
