@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from '../contexts/LanguageContext';
+import { translations } from '../data/translations';
 import '../styles/NavBar.css';
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
+  const { language, toggleLanguage } = useLanguage();
+  const t = translations[language].nav;
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -16,6 +20,18 @@ function NavBar() {
 
   const navigateToTibuShare = () => {
     window.history.pushState({}, '', '/tibu-share');
+    window.dispatchEvent(new Event('popstate'));
+    setIsMenuOpen(false);
+  };
+
+  const navigateToDocs = () => {
+    window.history.pushState({}, '', '/docs');
+    window.dispatchEvent(new Event('popstate'));
+    setIsMenuOpen(false);
+  };
+
+  const navigateToHome = () => {
+    window.history.pushState({}, '', '/');
     window.dispatchEvent(new Event('popstate'));
     setIsMenuOpen(false);
   };
@@ -34,7 +50,7 @@ function NavBar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => scrollToSection('hero')}>
+        <div className="navbar-logo" onClick={navigateToHome}>
           띠부띠부챗
         </div>
 
@@ -47,18 +63,33 @@ function NavBar() {
         </button>
 
         <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
-          <li onClick={() => scrollToSection('features')}>Features</li>
-          <li onClick={() => scrollToSection('docs')}>Docs</li>
-          <li onClick={() => scrollToSection('teams')}>Teams</li>
-          <li onClick={() => scrollToSection('demo')}>Demo</li>
-          <li onClick={() => scrollToSection('contact')}>Contact</li>
-          <li onClick={navigateToTibuShare}>띠부 공유</li>
+          <li onClick={() => {
+            const currentPath = window.location.pathname;
+            if (currentPath === '/' || currentPath === '') {
+              scrollToSection('features');
+            } else {
+              navigateToHome();
+              setTimeout(() => scrollToSection('features'), 100);
+            }
+          }}>Features</li>
+          <li onClick={navigateToDocs}>{t.docs}</li>
+          <li onClick={() => {
+            const currentPath = window.location.pathname;
+            if (currentPath === '/' || currentPath === '') {
+              scrollToSection('demo');
+            } else {
+              navigateToHome();
+              setTimeout(() => scrollToSection('demo'), 100);
+            }
+          }}>{t.demo}</li>
+          <li onClick={navigateToTibuShare}>{t.tibuShare}</li>
           <li>
             <button
-              className="cta-button"
-              onClick={() => scrollToSection('docs')}
+              className="language-toggle"
+              onClick={toggleLanguage}
+              aria-label="언어 변경"
             >
-              Get Started
+              {language === 'ko' ? '한국어' : 'English'}
             </button>
           </li>
           <li>
@@ -66,12 +97,12 @@ function NavBar() {
               <div className="auth-info">
                 <span className="user-name">{user?.name}</span>
                 <button className="logout-button" onClick={handleLogout}>
-                  로그아웃
+                  {language === 'ko' ? '로그아웃' : 'Logout'}
                 </button>
               </div>
             ) : (
               <button className="login-button" onClick={handleLogin}>
-                로그인
+                {language === 'ko' ? '로그인' : 'Login'}
               </button>
             )}
           </li>
