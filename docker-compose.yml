@@ -67,10 +67,65 @@ services:
       interval: 5s
     restart: unless-stopped
 
+  # Prometheus 모니터링
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ttibu-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - ttibu-network
+    restart: unless-stopped
+
+  # Grafana 대시보드
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ttibu-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - ttibu-network
+    restart: unless-stopped
+
+  # PostgreSQL Exporter
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    container_name: ttibu-postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://tibutibu:tibutibu@db:5432/ttibu?sslmode=disable
+    depends_on:
+      - db
+    networks:
+      - ttibu-network
+    restart: unless-stopped
+
 networks:
   ttibu-network:
     driver: bridge
 
 volumes:
   postgres-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
     driver: local
